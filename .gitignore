@@ -1,0 +1,19 @@
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform variable files
+*.tfvars
+*.tfvars.json
+
+# Ignore provider-specific data
+.terraform/
+.terraform.lock.hcl
+
+# Ignore local environment settings
+terraform.tfvars
+
+# Ignore AWS credentials files if stored in the project directory
+.aws/credentials
+.aws/config
+
