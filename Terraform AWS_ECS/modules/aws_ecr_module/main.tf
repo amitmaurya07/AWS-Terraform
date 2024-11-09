@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "three-tier" {
+resource "aws_ecr_repository" "three-tier-frontend" {
   name = var.name
   image_tag_mutability = "MUTABLE"
 

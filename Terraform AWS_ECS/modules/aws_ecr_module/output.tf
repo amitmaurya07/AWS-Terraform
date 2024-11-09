@@ -1,7 +1,7 @@
-output "repository_url" {
-  value = aws_ecr_repository.three-tier.repository_url
+output "frontend-repository_url" {
+  value = aws_ecr_repository.three-tier-frontend.repository_url
 }
 
-output "repositoy_name" {
-  value = aws_ecr_repository.three-tier.name
+output "frontend-repositoy_name" {
+  value = aws_ecr_repository.three-tier-frontend.name
 }

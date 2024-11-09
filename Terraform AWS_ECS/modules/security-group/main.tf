@@ -14,6 +14,13 @@ resource "aws_security_group" "ec2_sg" {
   }
 
   ingress {
+    from_port   = 27017
+    to_port     = 27017
+    protocol    = "tcp"
+    cidr_blocks = [var.allowed_ssh_cidr] 
+  }
+
+  ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -23,6 +30,13 @@ resource "aws_security_group" "ec2_sg" {
     ingress {
     from_port   = 5173
     to_port     = 5173
+    protocol    = "tcp"
+    cidr_blocks = [var.allowed_ssh_cidr]
+  }
+
+    ingress {
+    from_port   = 5000
+    to_port     = 5000
     protocol    = "tcp"
     cidr_blocks = [var.allowed_ssh_cidr]
   }

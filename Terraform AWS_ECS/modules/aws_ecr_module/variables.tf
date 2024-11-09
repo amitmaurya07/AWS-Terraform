@@ -1,4 +1,4 @@
 variable "name" {
-  description = "Provide the name of ECR Repository"
+  description = "Provide the name of Frontend ECR Repository"
   type = string
 }

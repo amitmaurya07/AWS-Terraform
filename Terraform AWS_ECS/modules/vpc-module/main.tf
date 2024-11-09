@@ -7,9 +7,15 @@ resource "aws_vpc" "three-tier" {
   }
 }
 
+data "aws_availability_zones" "available" {
+}
+
 resource "aws_subnet" "public" {
   vpc_id = aws_vpc.three-tier.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = cidrsubnet(aws_vpc.three-tier.cidr_block, 8, count.index + 1)
+  count = 2
+  availability_zone = element(data.aws_availability_zones.available.names, count.index)
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "three-tier-public"
@@ -18,7 +24,8 @@ resource "aws_subnet" "public" {
 
 resource "aws_subnet" "private" {
   vpc_id = aws_vpc.three-tier.id
-  cidr_block = "10.0.2.0/24"
+  cidr_block = cidrsubnet(aws_vpc.three-tier.cidr_block, 8, count.index + 4)
+  count = 2
 
   tags = {
     Name = "three-tier-private"
@@ -51,11 +58,13 @@ resource "aws_route_table" "private-rt" {
 }
 
 resource "aws_route_table_association" "public-rt-association" {
-  subnet_id = aws_subnet.public.id
+  count = length(aws_subnet.public)
+  subnet_id = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public-rt.id
 }
 
 resource "aws_route_table_association" "private-rt-association" {
-  subnet_id = aws_subnet.private.id
+  count = length(aws_subnet.private)
+  subnet_id = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private-rt.id
 }

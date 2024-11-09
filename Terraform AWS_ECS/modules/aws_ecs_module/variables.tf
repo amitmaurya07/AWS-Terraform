@@ -3,6 +3,15 @@ variable "name" {
   type = string
 }
 
+variable "ecs_cluster_id" {
+  description = "Provide ECS Cluster ID"
+  type = string
+}
+
+variable "port" {
+  type = number
+}
+
 variable "vpc_id" {
   description = "Id of VPC"
   type = string
@@ -11,11 +20,6 @@ variable "vpc_id" {
 variable "subnet_id" {
   description = "ID of Public and Private Subnet"
   type = list(string)
-}
-
-variable "sg_id" {
-  description = "Security Group ID"
-  type = string
 }
 
 variable "ecr_repo_url" {
@@ -28,4 +32,8 @@ variable "image_tag" {
 
 variable "security_group_id" {
   type = string
+}
+
+variable"target_group_arn" {
+    type = string
 }
